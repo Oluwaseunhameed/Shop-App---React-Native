@@ -6,6 +6,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { Ionicons } from "@expo/vector-icons";
 
 import ProductsOverviewScreen from "../screens/shop/ProductsOverviewScreen";
+import ProductDetailScreen from "../screens/shop/ProductDetailScreen";
 import Colors from "../constants/Colors";
 
 const defaultHeaderSettings = {
@@ -26,6 +27,11 @@ const ShopNavigator = () => {
           name="All Products"
           component={ProductsOverviewScreen}
           options={{ title: "All Products" }}
+        />
+        <ProductsNavigator.Screen
+          name="Product Detail"
+          component={ProductDetailScreen}
+          options={{ title: "Product Detail" }}
         />
       </ProductsNavigator.Navigator>
     </NavigationContainer>
