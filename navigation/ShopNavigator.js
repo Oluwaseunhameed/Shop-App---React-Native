@@ -7,6 +7,7 @@ import { Ionicons } from "@expo/vector-icons";
 
 import ProductsOverviewScreen from "../screens/shop/ProductsOverviewScreen";
 import ProductDetailScreen from "../screens/shop/ProductDetailScreen";
+import CartScreen from "../screens/shop/CartScreen";
 import Colors from "../constants/Colors";
 
 const defaultHeaderSettings = {
@@ -38,6 +39,11 @@ const ShopNavigator = () => {
           name="Product Detail"
           component={ProductDetailScreen}
           options={{ title: "Product Detail" }}
+        />
+        <ProductsNavigator.Screen
+          name="Cart"
+          component={CartScreen}
+          options={{ title: "Cart" }}
         />
       </ProductsNavigator.Navigator>
     </NavigationContainer>
