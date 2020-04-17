@@ -7,6 +7,7 @@ import { Ionicons } from "@expo/vector-icons";
 
 import ProductsOverviewScreen from "../screens/shop/ProductsOverviewScreen";
 import ProductDetailScreen from "../screens/shop/ProductDetailScreen";
+import OrdersScreen from "../screens/shop/OrdersScreen";
 import CartScreen from "../screens/shop/CartScreen";
 import Colors from "../constants/Colors";
 
@@ -24,28 +25,75 @@ const defaultHeaderSettings = {
   headerTitleAlign: "center",
 };
 
+const Drawer = createDrawerNavigator();
 const ProductsNavigator = createStackNavigator();
+const OrdersNavigator = createStackNavigator();
+
+const ProductsStack = () => (
+  <ProductsNavigator.Navigator screenOptions={defaultHeaderSettings}>
+    <ProductsNavigator.Screen
+      name="All Products"
+      component={ProductsOverviewScreen}
+      options={{ title: "All Products" }}
+    />
+    <ProductsNavigator.Screen
+      name="Product Detail"
+      component={ProductDetailScreen}
+      options={{ title: "Product Detail" }}
+    />
+    <ProductsNavigator.Screen
+      name="Your Cart"
+      component={CartScreen}
+      options={{ title: "Your Cart" }}
+    />
+  </ProductsNavigator.Navigator>
+);
+
+const OrdersStack = () => (
+  <OrdersNavigator.Navigator screenOptions={defaultHeaderSettings}>
+    <OrdersNavigator.Screen
+      name="Your Order(s)"
+      component={OrdersScreen}
+      options={{ title: "Your Order(s)" }}
+    />
+  </OrdersNavigator.Navigator>
+);
 
 const ShopNavigator = () => {
   return (
     <NavigationContainer>
-      <ProductsNavigator.Navigator screenOptions={defaultHeaderSettings}>
-        <ProductsNavigator.Screen
-          name="All Products"
-          component={ProductsOverviewScreen}
-          options={{ title: "All Products" }}
+      <Drawer.Navigator
+        drawerContentOptions={{
+          activeTintColor: Colors.primary,
+        }}
+      >
+        <Drawer.Screen
+          name="Products"
+          component={ProductsStack}
+          options={{
+            drawerIcon: ({ size }) => (
+              <Ionicons
+                name={Platform.OS === "android" ? "md-cart" : "ios-cart"}
+                size={size}
+                color={Colors.primary}
+              />
+            ),
+          }}
         />
-        <ProductsNavigator.Screen
-          name="Product Detail"
-          component={ProductDetailScreen}
-          options={{ title: "Product Detail" }}
+        <Drawer.Screen
+          name="Orders"
+          component={OrdersStack}
+          options={{
+            drawerIcon: ({ size }) => (
+              <Ionicons
+                name={Platform.OS === "android" ? "md-list" : "ios-list"}
+                size={size}
+                color={Colors.primary}
+              />
+            ),
+          }}
         />
-        <ProductsNavigator.Screen
-          name="Cart"
-          component={CartScreen}
-          options={{ title: "Cart" }}
-        />
-      </ProductsNavigator.Navigator>
+      </Drawer.Navigator>
     </NavigationContainer>
   );
 };

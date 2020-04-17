@@ -14,13 +14,24 @@ const ProductsOverviewScreen = (props) => {
 
   React.useLayoutEffect(() => {
     navigation.setOptions({
+      headerLeft: () => (
+        <HeaderButtons HeaderButtonComponent={HeaderButton}>
+          <Item
+            title="Menu"
+            iconName={Platform.OS === "android" ? "md-menu" : "ios-menu"}
+            onPress={() => {
+              navigation.toggleDrawer();
+            }}
+          />
+        </HeaderButtons>
+      ),
       headerRight: () => (
         <HeaderButtons HeaderButtonComponent={HeaderButton}>
           <Item
             title="Cart"
             iconName={Platform.OS === "android" ? "md-cart" : "ios-cart"}
             onPress={() => {
-              navigation.navigate("Cart");
+              navigation.navigate("Your Cart");
             }}
           />
         </HeaderButtons>
