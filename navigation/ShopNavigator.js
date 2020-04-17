@@ -9,6 +9,7 @@ import ProductsOverviewScreen from "../screens/shop/ProductsOverviewScreen";
 import ProductDetailScreen from "../screens/shop/ProductDetailScreen";
 import OrdersScreen from "../screens/shop/OrdersScreen";
 import CartScreen from "../screens/shop/CartScreen";
+import UserProductsScreen from "../screens/user/UserProductsScreen";
 import Colors from "../constants/Colors";
 
 const defaultHeaderSettings = {
@@ -28,6 +29,7 @@ const defaultHeaderSettings = {
 const Drawer = createDrawerNavigator();
 const ProductsNavigator = createStackNavigator();
 const OrdersNavigator = createStackNavigator();
+const AdminNavigator = createStackNavigator();
 
 const ProductsStack = () => (
   <ProductsNavigator.Navigator screenOptions={defaultHeaderSettings}>
@@ -59,6 +61,16 @@ const OrdersStack = () => (
   </OrdersNavigator.Navigator>
 );
 
+const AdminStack = () => (
+  <AdminNavigator.Navigator screenOptions={defaultHeaderSettings}>
+    <AdminNavigator.Screen
+      name="You Product(s)"
+      component={UserProductsScreen}
+      options={{ title: "You Product(s)" }}
+    />
+  </AdminNavigator.Navigator>
+);
+
 const ShopNavigator = () => {
   return (
     <NavigationContainer>
@@ -87,6 +99,19 @@ const ShopNavigator = () => {
             drawerIcon: ({ size }) => (
               <Ionicons
                 name={Platform.OS === "android" ? "md-list" : "ios-list"}
+                size={size}
+                color={Colors.primary}
+              />
+            ),
+          }}
+        />
+        <Drawer.Screen
+          name="Admin"
+          component={AdminStack}
+          options={{
+            drawerIcon: ({ size }) => (
+              <Ionicons
+                name={Platform.OS === "android" ? "md-create" : "ios-create"}
                 size={size}
                 color={Colors.primary}
               />
